@@ -1,0 +1,7 @@
+{
+  "name": "hello-world",
+  "repository": "https://github.com/lm-tools/hello-world",
+  "buildpacks": [
+    { "url": "heroku/nodejs" }
+  ]
+}
