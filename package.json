@@ -7,7 +7,7 @@
     "compile": "gulp css",
     "watch": "gulp watch",
     "lint": "eslint .",
-    "pretest": "npm-shrinkwrap-check && eslint .",
+    "pretest": "npm-shrinkwrap-check -3 && eslint .",
     "test": "NODE_ENV=test mocha && NODE_ENV=test cucumber.js",
     "heroku-postbuild": "npm run compile"
   },
@@ -37,7 +37,7 @@
     "eslint-config-airbnb-base": "^3.0.1",
     "eslint-plugin-import": "^1.8.0",
     "mocha": "^2.4.5",
-    "npm-shrinkwrap-check": "0.0.9",
+    "npm-shrinkwrap-check": "^0.1.0",
     "zombie": "^4.2.1"
   },
   "engines": {
