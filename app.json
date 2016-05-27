@@ -1,6 +1,12 @@
 {
   "name": "hello-world",
   "repository": "https://github.com/lm-tools/hello-world",
+  "scripts": {
+    "postdeploy": "npm run db-migration"
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
   "buildpacks": [
     { "url": "heroku/nodejs" }
   ]
