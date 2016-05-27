@@ -3,6 +3,7 @@ const gutil = require('gulp-util');
 const sass = require('gulp-sass');
 const plumber = require('gulp-plumber');
 const spawn = require('child_process').spawn;
+const babel = require('gulp-babel');
 const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const streamify = require('gulp-streamify');
@@ -18,8 +19,10 @@ gulp.task('browserify', () => {
       gutil.log(err);
       this.emit('end');
     })
+    .pipe(plumber())
     .pipe(source('main.js'))
-    .pipe(streamify(uglify())) // uglify chokes on raw streams
+    .pipe(streamify(babel({ presets: ['es2015'] }))) // babel doesn't support streaming
+    .pipe(streamify(uglify())) // uglify doesn't support streaming
     .pipe(gulp.dest('dist/public/js'));
 });
 
