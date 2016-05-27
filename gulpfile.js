@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const gutil = require('gulp-util');
 const sass = require('gulp-sass');
 const plumber = require('gulp-plumber');
 const spawn = require('child_process').spawn;
@@ -12,6 +13,11 @@ let node;
 gulp.task('browserify', () => {
   browserify('assets/js/main.js')
     .bundle()
+    .on('error', function (err) {
+      gutil.log(gutil.colors.red('Browserify compilation error:'));
+      gutil.log(err);
+      this.emit('end');
+    })
     .pipe(source('main.js'))
     .pipe(streamify(uglify())) // uglify chokes on raw streams
     .pipe(gulp.dest('dist/public/js'));
