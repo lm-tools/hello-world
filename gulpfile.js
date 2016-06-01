@@ -26,6 +26,15 @@ gulp.task('browserify', () => {
     .pipe(gulp.dest('dist/public/js'));
 });
 
+gulp.task('js-vendor', () => {
+  gulp.src([
+    'node_modules/govuk_frontend_toolkit/javascripts/govuk/selection-buttons.js',
+    'node_modules/jquery/dist/jquery.min.js',
+  ]).pipe(gulp.dest('dist/public/js'));
+});
+
+gulp.task('js', ['browserify', 'js-vendor']);
+
 gulp.task('css', () => {
   gulp.src('assets/stylesheets/*.scss')
     .pipe(plumber())
@@ -51,7 +60,7 @@ gulp.task('server', () => {
   });
 });
 
-gulp.task('watch', ['browserify', 'css', 'server'], () => {
+gulp.task('watch', ['js', 'css', 'server'], () => {
   gulp.watch(['routes/**/*.js', '*.js'], ['server']);
   gulp.watch('assets/stylesheets/*.scss', ['css']);
   gulp.watch('assets/js/**/*.js', ['browserify']);
