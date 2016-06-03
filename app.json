@@ -2,7 +2,7 @@
   "name": "hello-world",
   "repository": "https://github.com/lm-tools/hello-world",
   "scripts": {
-    "postdeploy": "npm run db-migration"
+    "postdeploy": "npm run db-migrate"
   },
   "addons": [
     "heroku-postgresql"
