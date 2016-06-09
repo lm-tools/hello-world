@@ -21,6 +21,17 @@ $ npm install
 $ npm run watch
 ```
 
+## Mounting the application in a directory
+
+The app will run mounted at `/` by default. To run within a directory, set the
+`EXPRESS_BASE_PATH` environment variable.
+
+For example, to mount the application at `/hello-world`, run:
+
+```sh
+$ EXPRESS_BASE_PATH=/hello-world npm run start
+```
+
 [build status image]: https://api.travis-ci.org/lm-tools/hello-world.svg
 [ci]: https://travis-ci.org/lm-tools/hello-world
 [express]: http://expressjs.com/

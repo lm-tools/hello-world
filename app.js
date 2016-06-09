@@ -16,12 +16,18 @@ app.engine('mustache', cons.hogan);
 app.set('view engine', 'mustache');
 app.set('views', path.join(__dirname, 'views'));
 
+// run the whole application in a directory
+const basePath = app.locals.basePath = process.env.EXPRESS_BASE_PATH || '';
+const assetPath = `${basePath}/`;
+
 // Middleware to set default layouts.
 // This must be done per request (and not via app.locals) as the Consolidate.js
 // renderer mutates locals.partials :(
 app.use((req, res, next) => {
   /* eslint no-param-reassign: "off" */
   res.locals = {
+    assetPath,
+    basePath,
     partials: {
       layout: 'layouts/main',
       govukTemplate: '../vendor/govuk_template_mustache_inheritance/views/layouts/govuk_template',
@@ -40,12 +46,13 @@ app.use(logger.init(app.get('env')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist/public')));
-app.use(express.static(path.join(__dirname,
+
+app.use(assetPath, express.static(path.join(__dirname, 'dist', 'public')));
+app.use(assetPath, express.static(path.join(__dirname,
   'vendor', 'govuk_template_mustache_inheritance', 'assets')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use(`${basePath}/`, routes);
+app.use(`${basePath}/users`, users);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
