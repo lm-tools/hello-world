@@ -7,8 +7,10 @@ const bodyParser = require('body-parser');
 
 const routes = require('./routes/index');
 const users = require('./routes/users');
+const i18n = require('./middleware/i18n');
 
 const app = express();
+i18n(app);
 
 // view engine setup
 const cons = require('consolidate');
@@ -24,8 +26,8 @@ const assetPath = `${basePath}/`;
 // This must be done per request (and not via app.locals) as the Consolidate.js
 // renderer mutates locals.partials :(
 app.use((req, res, next) => {
-  /* eslint no-param-reassign: "off" */
-  res.locals = {
+  // eslint-disable-next-line no-param-reassign
+  Object.assign(res.locals, {
     assetPath,
     basePath,
     partials: {
@@ -33,7 +35,7 @@ app.use((req, res, next) => {
       govukTemplate:
         '../../vendor/govuk_template_mustache_inheritance/views/layouts/govuk_template',
     },
-  };
+  });
   next();
 });
 
