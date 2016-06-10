@@ -53,6 +53,7 @@
     "eslint-plugin-import": "^1.8.0",
     "knex-cleaner": "^1.1.3",
     "mocha": "^2.4.5",
+    "moment": "^2.14.1",
     "npm-shrinkwrap-check": "git+https://git@github.com/gjvis/npm-shrinkwrap-check.git#ignore-nested-package-json-files",
     "zombie": "^4.2.1"
   },
