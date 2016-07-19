@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const routes = require('./routes/index');
 const users = require('./routes/users');
 const i18n = require('./middleware/i18n');
+const healthCheckController = require('./controllers/health-check-controller');
 
 const app = express();
 i18n(app);
@@ -21,6 +22,9 @@ app.set('views', path.join(__dirname, 'views'));
 // run the whole application in a directory
 const basePath = app.locals.basePath = process.env.EXPRESS_BASE_PATH || '';
 const assetPath = `${basePath}/`;
+
+app.use('/health_check', healthCheckController);
+app.use(`${basePath}/health_check`, healthCheckController);
 
 // Middleware to set default layouts.
 // This must be done per request (and not via app.locals) as the Consolidate.js
@@ -53,6 +57,7 @@ app.use(cookieParser());
 app.use(assetPath, express.static(path.join(__dirname, '..', 'dist', 'public')));
 app.use(assetPath, express.static(path.join(__dirname, '..',
   'vendor', 'govuk_template_mustache_inheritance', 'assets')));
+
 
 app.use(`${basePath}/`, routes);
 app.use(`${basePath}/users`, users);
