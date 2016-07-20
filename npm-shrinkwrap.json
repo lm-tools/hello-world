@@ -867,6 +867,11 @@
       "from": "cucumber-html@>=0.2.3 <0.3.0",
       "resolved": "https://registry.npmjs.org/cucumber-html/-/cucumber-html-0.2.3.tgz"
     },
+    "cycle": {
+      "version": "1.0.3",
+      "from": "cycle@>=1.0.0 <1.1.0",
+      "resolved": "https://registry.npmjs.org/cycle/-/cycle-1.0.3.tgz"
+    },
     "d": {
       "version": "0.1.1",
       "from": "d@>=0.1.1 <0.2.0",
@@ -1300,6 +1305,11 @@
       "version": "1.0.2",
       "from": "extsprintf@1.0.2",
       "resolved": "https://registry.npmjs.org/extsprintf/-/extsprintf-1.0.2.tgz"
+    },
+    "eyes": {
+      "version": "0.1.8",
+      "from": "eyes@>=0.1.0 <0.2.0",
+      "resolved": "https://registry.npmjs.org/eyes/-/eyes-0.1.8.tgz"
     },
     "fancy-log": {
       "version": "1.2.0",
@@ -2862,6 +2872,11 @@
       "from": "pkg-up@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/pkg-up/-/pkg-up-1.0.0.tgz"
     },
+    "pkginfo": {
+      "version": "0.3.1",
+      "from": "pkginfo@>=0.3.0 <0.4.0",
+      "resolved": "https://registry.npmjs.org/pkginfo/-/pkginfo-0.3.1.tgz"
+    },
     "plexer": {
       "version": "1.0.1",
       "from": "plexer@1.0.1",
@@ -3331,6 +3346,11 @@
       "from": "stack-chain@>=1.3.5 <2.0.0",
       "resolved": "https://registry.npmjs.org/stack-chain/-/stack-chain-1.3.7.tgz"
     },
+    "stack-trace": {
+      "version": "0.0.9",
+      "from": "stack-trace@>=0.0.0 <0.1.0",
+      "resolved": "https://registry.npmjs.org/stack-trace/-/stack-trace-0.0.9.tgz"
+    },
     "statuses": {
       "version": "1.3.0",
       "from": "statuses@>=1.0.0 <2.0.0",
@@ -3784,6 +3804,23 @@
       "version": "0.1.4",
       "from": "window-size@>=0.1.4 <0.2.0",
       "resolved": "https://registry.npmjs.org/window-size/-/window-size-0.1.4.tgz"
+    },
+    "winston": {
+      "version": "2.2.0",
+      "from": "winston@latest",
+      "resolved": "https://registry.npmjs.org/winston/-/winston-2.2.0.tgz",
+      "dependencies": {
+        "async": {
+          "version": "1.0.0",
+          "from": "async@>=1.0.0 <1.1.0",
+          "resolved": "https://registry.npmjs.org/async/-/async-1.0.0.tgz"
+        },
+        "colors": {
+          "version": "1.0.3",
+          "from": "colors@>=1.0.0 <1.1.0",
+          "resolved": "https://registry.npmjs.org/colors/-/colors-1.0.3.tgz"
+        }
+      }
     },
     "wordwrap": {
       "version": "0.0.2",

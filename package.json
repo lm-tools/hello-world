@@ -43,7 +43,8 @@
     "node-uuid": "~1.4",
     "pg": "^4.5.5",
     "serve-favicon": "~2.3",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
