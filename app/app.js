@@ -22,6 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 // run the whole application in a directory
 const basePath = app.locals.basePath = process.env.EXPRESS_BASE_PATH || '';
 const assetPath = `${basePath}/`;
+const googleTagManagerId = process.env.GOOGLE_TAG_MANAGER_ID;
 
 app.use('/health_check', healthCheckController);
 app.use(`${basePath}/health_check`, healthCheckController);
@@ -34,10 +35,12 @@ app.use((req, res, next) => {
   Object.assign(res.locals, {
     assetPath,
     basePath,
+    googleTagManagerId,
     partials: {
       layout: 'layouts/main',
       govukTemplate:
         '../../vendor/govuk_template_mustache_inheritance/views/layouts/govuk_template',
+      googleTagManager: 'partials/google-tag-manager',
     },
   });
   next();
