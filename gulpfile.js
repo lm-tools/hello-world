@@ -12,7 +12,7 @@ const uglify = require('gulp-uglify');
 let node;
 
 gulp.task('browserify', () => {
-  browserify('assets/js/main.js')
+  browserify('app/assets/js/main.js')
     .bundle()
     .on('error', function (err) {
       gutil.log(gutil.colors.red('Browserify compilation error:'));
@@ -36,7 +36,7 @@ gulp.task('js-vendor', () => {
 gulp.task('js', ['browserify', 'js-vendor']);
 
 gulp.task('css', () => {
-  gulp.src('assets/stylesheets/*.scss')
+  gulp.src('app/assets/stylesheets/*.scss')
     .pipe(plumber())
     .pipe(
       sass({
@@ -61,9 +61,9 @@ gulp.task('server', () => {
 });
 
 gulp.task('watch', ['js', 'css', 'server'], () => {
-  gulp.watch(['routes/**/*.js', '*.js'], ['server']);
-  gulp.watch('assets/stylesheets/*.scss', ['css']);
-  gulp.watch('assets/js/**/*.js', ['browserify']);
+  gulp.watch(['app/**/*.js', 'bin/www'], ['server']);
+  gulp.watch('app/assets/stylesheets/*.scss', ['css']);
+  gulp.watch('app/assets/js/**/*.js', ['browserify']);
 });
 
 

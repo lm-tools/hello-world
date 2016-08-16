@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('./logger');
+const logger = require('./../logger');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
@@ -30,14 +30,15 @@ app.use((req, res, next) => {
     basePath,
     partials: {
       layout: 'layouts/main',
-      govukTemplate: '../vendor/govuk_template_mustache_inheritance/views/layouts/govuk_template',
+      govukTemplate:
+        '../../vendor/govuk_template_mustache_inheritance/views/layouts/govuk_template',
     },
   };
   next();
 });
 
 // uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname,
+app.use(favicon(path.join(__dirname, '..',
   'vendor', 'govuk_template_mustache_inheritance', 'assets', 'images', 'favicon.ico')));
 
 // Configure logging
@@ -47,8 +48,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(assetPath, express.static(path.join(__dirname, 'dist', 'public')));
-app.use(assetPath, express.static(path.join(__dirname,
+app.use(assetPath, express.static(path.join(__dirname, '..', 'dist', 'public')));
+app.use(assetPath, express.static(path.join(__dirname, '..',
   'vendor', 'govuk_template_mustache_inheritance', 'assets')));
 
 app.use(`${basePath}/`, routes);
