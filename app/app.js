@@ -5,8 +5,8 @@ const logger = require('./../logger');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const routes = require('./routes/index');
-const users = require('./routes/users');
+const indexController = require('./controllers/index-controller');
+const usersController = require('./controllers/users-controller');
 const i18n = require('./middleware/i18n');
 const healthCheckController = require('./controllers/health-check-controller');
 
@@ -62,8 +62,8 @@ app.use(assetPath, express.static(path.join(__dirname, '..',
   'vendor', 'govuk_template_mustache_inheritance', 'assets')));
 
 
-app.use(`${basePath}/`, routes);
-app.use(`${basePath}/users`, users);
+app.use(`${basePath}/`, indexController);
+app.use(`${basePath}/users`, usersController);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
