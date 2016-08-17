@@ -48,6 +48,8 @@ module.exports.init = (env) => {
     return morgan('tiny', {
       stream: fs.createWriteStream(`${__dirname}/logs/test.log`, { flags: 'w' }),
     });
+  } else if (env === 'production') {
+    return morgan('combined');
   }
   return morgan('dev+');
 };
