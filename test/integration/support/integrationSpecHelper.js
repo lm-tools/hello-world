@@ -4,6 +4,7 @@ const browser = new Zombie();
 const screenshots = require('./screenshots');
 const GoogleTagManagerHelper = require('../../common/page_objects/google-tag-manager-helper');
 const MainPage = require('../../common/page_objects/main-page');
+const ErrorPage = require('../../common/page_objects/error-page');
 
 process.env.GOOGLE_TAG_MANAGER_ID = 'fake-id';
 require('../../../bin/www'); // This starts the web server, and ensures it is only
@@ -20,4 +21,5 @@ module.exports = {
   browser,
   googleTagManagerHelper: new GoogleTagManagerHelper(browser),
   mainPage: new MainPage(browser),
+  errorPage: new ErrorPage(browser),
 };
