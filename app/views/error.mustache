@@ -1,9 +1,22 @@
 {{<layout}}
 
-  {{$applicationContent}}
+{{$applicationContent}}
+<div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+
+  <h1 class="heading-medium error-summary-heading" id="error-summary-heading" data-test="message">
+    {{message}}
+  </h1>
+
+</div>
+
+{{#error}}
+  <div data-test="error-details">
     <h1>{{ message }}</h1>
-    <h2>{{ error.status }}</h2>
-    <pre>{{ error.stack }}</pre>
-  {{/applicationContent}}
+    <h2>{{ status }}</h2>
+    <pre>{{ stack }}</pre>
+  </div>
+{{/error}}
+
+{{/applicationContent}}
 
 {{/layout}}
