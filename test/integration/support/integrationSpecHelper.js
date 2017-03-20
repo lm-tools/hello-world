@@ -7,9 +7,7 @@ const MainPage = require('../../common/page_objects/main-page');
 const ErrorPage = require('../../common/page_objects/error-page');
 
 process.env.GOOGLE_TAG_MANAGER_ID = 'fake-id';
-require('../../../bin/www'); // This starts the web server, and ensures it is only
-                          // started once. It is a misuse of "require", and
-                          // should be improved.
+const app = require('../../../bin/www');
 
 afterEach(function () {
   if (this.currentTest.state === 'failed') {
@@ -22,4 +20,5 @@ module.exports = {
   googleTagManagerHelper: new GoogleTagManagerHelper(browser),
   mainPage: new MainPage(browser),
   errorPage: new ErrorPage(browser),
+  app,
 };
