@@ -13,9 +13,7 @@
     "db-migrate": "knex migrate:latest --knexfile db/knexfile.js",
     "features": "NODE_ENV=test cucumber.js && NODE_ENV=test EXPRESS_BASE_PATH=/example-base-path cucumber.js",
     "heroku-postbuild": "npm run compile",
-    "create-migration": "knex migrate:make --knexfile db/knexfile.js $MIGRATION",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "create-migration": "knex migrate:make --knexfile db/knexfile.js $MIGRATION"
   },
   "// NOTE": [
     "^Pinned dependencies are actually devDependencies, which are only",
@@ -51,8 +49,7 @@
     "serve-favicon": "~2.3",
     "vinyl-source-stream": "^1.1.0",
     "winston": "^2.2.0",
-    "ws": "^2.2.1",
-    "snyk": "^1.25.2"
+    "ws": "^2.2.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -69,6 +66,5 @@
   },
   "engines": {
     "node": "6.1.0"
-  },
-  "snyk": true
+  }
 }
