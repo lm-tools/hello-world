@@ -22,6 +22,10 @@ describe('Secure headers', () => {
     { header: 'x-download-options', value: 'noopen' },
     { header: 'x-content-type-options', value: 'nosniff' },
     { header: 'x-xss-protection', value: '1; mode=block' },
+    { header: 'surrogate-control', value: 'no-store' },
+    { header: 'cache-control', value: 'no-store, no-cache, must-revalidate, proxy-revalidate' },
+    { header: 'pragma', value: 'no-cache' },
+    { header: 'expires', value: '0' },
   ].forEach(s => {
     it(`should send ${s.header}`, () =>
       expect(this.response.headers).to.have.property(s.header, s.value)
