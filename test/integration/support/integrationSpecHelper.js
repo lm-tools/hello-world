@@ -5,6 +5,7 @@ const screenshots = require('./screenshots');
 const GoogleTagManagerHelper = require('../../common/page_objects/google-tag-manager-helper');
 const MainPage = require('../../common/page_objects/main-page');
 const ErrorPage = require('../../common/page_objects/error-page');
+const CookiePage = require('../../common/page_objects/cookie-page');
 
 process.env.GOOGLE_TAG_MANAGER_ID = 'fake-id';
 const app = require('../../../bin/www');
@@ -20,5 +21,6 @@ module.exports = {
   googleTagManagerHelper: new GoogleTagManagerHelper(browser),
   mainPage: new MainPage(browser),
   errorPage: new ErrorPage(browser),
+  cookiePage: new CookiePage(browser),
   app,
 };
