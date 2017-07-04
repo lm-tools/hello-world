@@ -4,6 +4,10 @@
     <link href="{{{ assetPath }}}stylesheets/style.css" media="screen" rel="stylesheet" type="text/css"/>
   {{/head}}
 
+  {{$cookieMessage}}
+    {{#__}}cookie.pretext{{/__}}. <a href="{{ basePath }}/cookie">{{#__}}cookie.linktext{{/__}}</a>
+  {{/cookieMessage}}
+
   {{$bodyStart}}
   {{>googleTagManager}}
   {{/bodyStart}}
