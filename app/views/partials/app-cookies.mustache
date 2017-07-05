@@ -1,0 +1,22 @@
+{{#appSpecificCookies.length}}
+<h3 class="heading-medium">{{#__}}cookie.appSpecific.title{{/__}}</h3>
+
+<table data-test="app-cookie-table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Purpose</th>
+    <th>Expires</th>
+  </tr>
+  </thead>
+  <tbody>
+  {{#appSpecificCookies}}
+    <tr data-test="app-cookie">
+      <td data-test="app-cookie-name">{{name}}</td>
+      <td data-test="app-cookie-purpose">{{purpose}}</td>
+      <td data-test="app-cookie-expires">{{expires}}</td>
+    </tr>
+  {{/appSpecificCookies}}
+  </tbody>
+</table>
+{{/appSpecificCookies.length}}
