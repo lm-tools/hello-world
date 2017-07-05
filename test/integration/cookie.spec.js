@@ -3,6 +3,7 @@ const helper = require('./support/integrationSpecHelper');
 const googleTagManagerHelper = helper.googleTagManagerHelper;
 const cookiePage = helper.cookiePage;
 const expect = require('chai').expect;
+const translation = require('./../../app/locales/en.json');
 
 describe('Cookie page', () => {
   before(() =>
@@ -15,5 +16,9 @@ describe('Cookie page', () => {
 
   it('displays govuk general cookie info', () =>
     expect(cookiePage.isDisplayed()).to.equal(true)
+  );
+
+  it('displays app specific cookie info', () =>
+    expect(cookiePage.getAppCookieTableData()).to.eql(translation.cookie.appSpecific.cookies)
   );
 });

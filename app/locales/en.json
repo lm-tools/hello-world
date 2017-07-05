@@ -5,7 +5,10 @@
   "cookie": {
     "pretext": "GOV.UK uses cookies to make the site simpler",
     "linktext": "Find out more about cookies",
-    "pagetitle": "Cookie"
+    "pagetitle": "Cookie",
+    "appSpecific": {
+      "cookies": []
+    }
   },
   "error": {
     "404": "Page not found",
