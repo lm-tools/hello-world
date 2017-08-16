@@ -50,7 +50,13 @@ module.exports.init = (env) => {
       stream: fs.createWriteStream(`${__dirname}/logs/test.log`, { flags: 'w' }),
     });
   } else if (env === 'production') {
-    const format = morganJson(':method :url :status :res[content-length] bytes :response-time ms');
+    const format = morganJson({
+      method: ':method',
+      path: ':url',
+      status: ':status',
+      bytes: ':res[content-length]',
+      duration: ':response-time',
+    });
     return morgan(format);
   }
   return morgan('dev+');
