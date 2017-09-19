@@ -44,7 +44,6 @@
     "jquery": "^2.2.4",
     "knex": "^0.11.5",
     "morgan": "^1.6.1",
-    "morgan-json": "^1.1.0",
     "node-uuid": "~1.4",
     "pg": "^4.5.5",
     "serve-favicon": "~2.3",

@@ -1,5 +1,4 @@
 const morgan = require('morgan');
-const morganJson = require('morgan-json');
 const fs = require('fs');
 
 function colorForStatus(status) {
@@ -44,20 +43,26 @@ morgan.format('dev+', function developmentFormatLine(tokens, req, res) {
   return fn(tokens, req, res);
 });
 
+// Morgan JSON output. Ensure duration is float
+morgan.token('duration', (req, res) => parseFloat(morgan['response-time'](req, res)));
+
+function jsonFormat(tokens, req, res) {
+  return JSON.stringify({
+    method: tokens.method(req, res),
+    path: tokens.url(req, res),
+    status: tokens.status(req, res),
+    bytes: tokens.res(req, res, 'content-length'),
+    duration: tokens.duration(req, res),
+  });
+}
+
 module.exports.init = (env) => {
   if (env === 'test') {
     return morgan('tiny', {
       stream: fs.createWriteStream(`${__dirname}/logs/test.log`, { flags: 'w' }),
     });
   } else if (env === 'production') {
-    const format = morganJson({
-      method: ':method',
-      path: ':url',
-      status: ':status',
-      bytes: ':res[content-length]',
-      duration: ':response-time',
-    });
-    return morgan(format);
+    return morgan(jsonFormat);
   }
   return morgan('dev+');
 };
