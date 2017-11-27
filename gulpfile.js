@@ -8,8 +8,25 @@ const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const streamify = require('gulp-streamify');
 const uglify = require('gulp-uglify');
+const { lintHtml } = require('lmt-utils');
+const http = require('http');
 
 let node;
+
+gulp.task('lint-all-html', () => {
+  process.env = process.env || 'TEST';
+  const port = 3001;
+  const serverStartPromise = new Promise(accept =>
+    // eslint-disable-next-line global-require
+    http.createServer(require('./app/app'))
+    .listen(port, () => accept())
+  );
+  return serverStartPromise.then(() => lintHtml({
+    url: `http://localhost:${port}`,
+  }))
+  .then(() => process.exit(0))
+  .catch(e => gutil.log(gutil.colors.red(e)) && process.exit(1));
+});
 
 gulp.task('browserify', () => {
   browserify('app/assets/js/main.js')
