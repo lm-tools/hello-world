@@ -1,7 +1,9 @@
 {{<govukTemplate}}
 
   {{$head}}
-    <link href="{{{ assetPath }}}stylesheets/style.css" media="screen" rel="stylesheet" type="text/css"/>
+    {{#layoutAssets.css}}
+      <link href="{{{.}}}" media="screen" rel="stylesheet" type="text/css"/>
+    {{/layoutAssets.css}}
   {{/head}}
 
   {{$cookieMessage}}
@@ -31,9 +33,9 @@
   {{/content}}
 
   {{$bodyEnd}}
-    <script type="text/javascript" src="{{{ assetPath }}}js/jquery.min.js"></script>
-    <script type="text/javascript" src="{{{ assetPath }}}js/selection-buttons.js"></script>
-    <script type="text/javascript" src="{{{ assetPath }}}js/main.js"></script>
+    {{#layoutAssets.js}}
+      <link href="{{{.}}}" media="screen" rel="stylesheet" type="text/css"/>
+    {{/layoutAssets.js}}
   {{/bodyEnd}}
 
 {{/govukTemplate}}

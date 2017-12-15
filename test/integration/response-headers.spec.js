@@ -1,6 +1,7 @@
 const request = require('supertest');
 const helper = require('./support/integrationSpecHelper');
 const expect = require('chai').expect;
+const layoutAssets = require('../../app/models/assets')({ assetPath: '/' });
 
 describe('Response headers', () => {
   describe('for dynamic html', () => {
@@ -39,7 +40,7 @@ describe('Response headers', () => {
     { title: 'for images', path: '/images/gov.uk_logotype_crown_invert_trans.png' },
     { title: 'for stylesheets', path: '/stylesheets/govuk-template.css' },
     { title: 'for govuk javascript', path: '/javascripts/govuk-template.js' },
-    { title: 'for app javascript', path: '/js/main.js' },
+    { title: 'for app javascript', path: layoutAssets.js[0] },
   ].forEach(d => {
     describe(d.title, () => {
       before(() =>
