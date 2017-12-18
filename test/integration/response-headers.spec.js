@@ -37,9 +37,9 @@ describe('Response headers', () => {
 
 
   [
-    { title: 'for images', path: '/images/gov.uk_logotype_crown_invert_trans.png' },
-    { title: 'for stylesheets', path: '/stylesheets/govuk-template.css' },
-    { title: 'for govuk javascript', path: '/javascripts/govuk-template.js' },
+    { title: 'for images', path: '/vendor/v1/images/gov.uk_logotype_crown_invert_trans.png' },
+    { title: 'for stylesheets', path: '/vendor/v1/stylesheets/govuk-template.css' },
+    { title: 'for govuk javascript', path: '/vendor/v1/javascripts/govuk-template.js' },
     { title: 'for app javascript', path: layoutAssets.js[0] },
   ].forEach(d => {
     describe(d.title, () => {
@@ -62,7 +62,7 @@ describe('Response headers', () => {
       });
 
       it('should send correct Cache-Control header', () =>
-        expect(this.response.headers).to.have.property('cache-control', 'public, max-age=0')
+        expect(this.response.headers).to.have.property('cache-control', 'public, max-age=3153600')
       );
       it('should send ETag for caching', () =>
         expect(this.response.headers).to.have.property('etag')
