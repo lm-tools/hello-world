@@ -1,5 +1,6 @@
 const Zombie = require('zombie');
-Zombie.site = 'http://localhost:3000';
+const port = require('../../common/config').port;
+Zombie.site = `http://localhost:${port}`;
 const browser = new Zombie();
 const screenshots = require('./screenshots');
 const GoogleTagManagerHelper = require('../../common/page_objects/google-tag-manager-helper');
@@ -8,6 +9,7 @@ const ErrorPage = require('../../common/page_objects/error-page');
 const CookiePage = require('../../common/page_objects/cookie-page');
 
 process.env.GOOGLE_TAG_MANAGER_ID = 'fake-id';
+process.env.PORT = port;
 const app = require('../../../bin/www');
 
 afterEach(function () {
