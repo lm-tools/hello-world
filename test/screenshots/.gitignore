@@ -1,0 +1,4 @@
+# Ignore everything in screenshots folder except the .gitignore.
+*
+*/
+!.gitignore
