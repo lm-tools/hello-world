@@ -2,7 +2,7 @@
 
 set -e
 
-if [ -z $1 ]; then
+if [ -z "$1" ]; then
   echo "Usage: $0 IMAGE"
   echo
   echo "Builds the app's docker image, tagged as both \"latest\" and as the git revision of HEAD"
@@ -17,14 +17,14 @@ set -u
     exit 1
   fi
 
-  if [[ -z $(git status 2> /dev/null | egrep 'working (directory|tree) clean') ]]; then
+  if [[ $(git status --porcelain) ]]; then
     echo "Cannot build: you have unstashed changes."
     echo "Please stash or commit them, then try again."
     exit 1
   fi
 
   HEAD=$(git rev-list HEAD -n1)
-  docker build --build-arg version=$HEAD -t $1:$HEAD -t $1:latest .
+  docker build --build-arg version="$HEAD" -t "$1":"$HEAD" -t "$1":latest .
 
   echo
   echo "Image tagged as:"
