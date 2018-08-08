@@ -1,12 +1,7 @@
 {
   "name": "lmt-app-moved",
   "repository": "https://github.com/lm-tools/lmt-app-moved",
-  "scripts": {
-    "postdeploy": "npm run db-migrate"
-  },
-  "addons": [
-    "heroku-postgresql"
-  ],
+  "addons": [],
   "buildpacks": [
     { "url": "heroku/nodejs" }
   ]
