@@ -4,13 +4,13 @@ module.exports = {
   development: {
     client: 'pg',
     connection: process.env.DATABASE_URL || {
-      database: 'hello_world',
+      database: 'lmt_app_moved',
     },
   },
   test: {
     client: 'pg',
     connection: process.env.DATABASE_URL || {
-      database: 'hello_world_test',
+      database: 'lmt_app_moved_test',
     },
   },
 

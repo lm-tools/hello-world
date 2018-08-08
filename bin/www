@@ -5,7 +5,7 @@
  */
 
 var app = require('../app/app');
-var debug = require('debug')('hello-world:server');
+var debug = require('debug')('lmt-app-moved:server');
 var http = require('http');
 
 /**

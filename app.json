@@ -1,6 +1,6 @@
 {
-  "name": "hello-world",
-  "repository": "https://github.com/lm-tools/hello-world",
+  "name": "lmt-app-moved",
+  "repository": "https://github.com/lm-tools/lmt-app-moved",
   "scripts": {
     "postdeploy": "npm run db-migrate"
   },
