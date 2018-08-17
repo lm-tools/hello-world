@@ -15,6 +15,8 @@ $ nvm install 6.11.1
 $ npm install -g npm@5.2.0
 ``` 
 
+Ensure `node_modules/.bin` is on your path
+
 Make sure that [PostgreSQL] is running, and that your current user (`$ whoami`)
 has full access. Alternatively, custom database details can be provided by setting
 a `DATABASE_URL` environment variable to a valid [PostgreSQL connection string]

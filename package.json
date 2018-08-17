@@ -49,6 +49,7 @@
     "morgan": "^1.6.1",
     "morgan-json": "^1.1.0",
     "node-uuid": "~1.4",
+    "npm-git-secrets": "^1.0.1",
     "pg": "^4.5.5",
     "serve-favicon": "~2.3",
     "setprototypeof": "^1.0.3",
