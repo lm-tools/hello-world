@@ -11,6 +11,7 @@
     }
   },
   "error": {
+    "400": "We're experiencing technical problems.",
     "404": "Page not found",
     "500": "We're experiencing technical problems."
   }

@@ -14,7 +14,6 @@ module.exports = app => {
   // eslint-disable-next-line no-unused-vars
   app.use((err, req, res, next) => {
     if (app.get('env') !== 'test') {
-      // eslint-disable-next-line no-console
       logger.error(err.stack);
     }
     const status = err.status || 500;
