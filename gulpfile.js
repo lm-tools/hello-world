@@ -1,4 +1,6 @@
 const gulp = require('gulp');
+const clean = require('gulp-clean');
+const runSequence = require('run-sequence');
 const gutil = require('gulp-util');
 const sass = require('gulp-sass');
 const plumber = require('gulp-plumber');
@@ -11,8 +13,9 @@ const uglify = require('gulp-uglify');
 const { lintHtml } = require('lmt-utils');
 const http = require('http');
 const rev = require('gulp-rev');
-const revDelOriginal = require('gulp-rev-delete-original');
 const debug = require('gulp-debug');
+
+const stagePath = 'dist/stage/';
 let node;
 
 gulp.task('lint-all-html', () => {
@@ -42,19 +45,23 @@ gulp.task('browserify', () =>
     .pipe(source('main.js'))
     .pipe(streamify(babel({ presets: ['es2015'] }))) // babel doesn't support streaming
     .pipe(streamify(uglify())) // uglify doesn't support streaming
-    .pipe(gulp.dest('dist/public/js'))
+    .pipe(gulp.dest(`${stagePath}js`))
 );
 
 gulp.task('js-vendor', () =>
   gulp.src([
     'node_modules/govuk_frontend_toolkit/javascripts/govuk/selection-buttons.js',
     'node_modules/jquery/dist/jquery.min.js',
-  ]).pipe(gulp.dest('dist/public/js'))
+  ]).pipe(gulp.dest(`${stagePath}js`))
 );
 
 gulp.task('js', ['browserify', 'js-vendor']);
 
-gulp.task('css', () =>
+gulp.task('fonts', () =>
+  gulp.src('node_modules/font-awesome/fonts/*').pipe(gulp.dest(`${stagePath}fonts`))
+);
+
+gulp.task('css', ['fonts'], () =>
   gulp.src('app/assets/stylesheets/*.scss')
     .pipe(plumber())
     .pipe(
@@ -63,26 +70,35 @@ gulp.task('css', () =>
           'src/assets/stylesheets',
           'node_modules/govuk_frontend_toolkit/stylesheets',
           'node_modules/govuk-elements-sass/public/sass',
+          'node_modules/font-awesome/scss/',
         ],
       }))
-    .pipe(gulp.dest('dist/public/stylesheets/'))
+    .pipe(gulp.dest(`${stagePath}stylesheets/`))
 );
 
-gulp.task('revision:rename', ['js', 'css'], () =>
+gulp.task('clean', () =>
+  gulp.src('dist/public', { read: false, allowEmpty: true })
+    .pipe(clean())
+);
+
+gulp.task('revision:rename', () =>
   gulp.src([
-    'dist/public/**/*.html',
-    'dist/public/**/*.css',
-    'dist/public/**/*.js',
-    'dist/public/**/*.{jpg,png,jpeg,gif,svg}'])
+    `${stagePath}**/*.html`,
+    `${stagePath}**/*.css`,
+    `${stagePath}**/*.js`,
+    `${stagePath}**/*.{jpg,png,jpeg,gif,svg,otf,eot,ttf,woff,woff2}`])
     .pipe(debug())
     .pipe(rev())
-    .pipe(revDelOriginal())
     .pipe(gulp.dest('./dist/public'))
     .pipe(rev.manifest())
     .pipe(gulp.dest('./dist/public'))
 );
 
-gulp.task('compile', ['revision:rename']);
+gulp.task('revision:steps', (callback) =>
+  runSequence('clean', 'js', 'css', 'revision:rename', callback)
+);
+
+gulp.task('compile', ['revision:steps']);
 
 
 gulp.task('server', () => {
@@ -95,9 +111,15 @@ gulp.task('server', () => {
   });
 });
 
-gulp.task('watch', ['compile', 'server'], () => {
+gulp.task('compile-server', (callback) => runSequence('compile', 'server', callback));
+
+gulp.task('watch', () => {
+  runSequence('compile', 'server', 'watch-steps');
+});
+
+gulp.task('watch-steps', () => {
   gulp.watch(['app/**/*.js', 'bin/www'], ['server']);
-  gulp.watch('app/assets/stylesheets/*.scss', ['css']);
+  gulp.watch('app/assets/stylesheets/**/*.scss', ['compile-server']);
   gulp.watch('app/assets/js/**/*.js', ['browserify']);
 });
 
