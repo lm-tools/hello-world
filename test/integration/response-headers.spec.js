@@ -45,7 +45,7 @@ describe('Response headers', () => {
     describe(d.title, () => {
       before(() =>
         request(helper.app)
-          .get(d.path)
+          .get(`${helper.basePath}${d.path}`)
           .then(response => {
             this.response = response;
           })

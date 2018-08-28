@@ -1,10 +1,9 @@
-class MainPage {
-  constructor(browser) {
-    this.browser = browser;
-  }
+const Page = require('./page');
 
+class MainPage extends Page {
   visit() {
-    return this.browser.visit('/');
+    return this.browser.visit(this.routes.mainUrl());
   }
 }
+
 module.exports = MainPage;
