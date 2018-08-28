@@ -1,5 +1,5 @@
 class GoogleTagManagerHelper {
-  constructor(browser) {
+  constructor({ browser }) {
     this.browser = browser;
   }
 

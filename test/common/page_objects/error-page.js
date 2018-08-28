@@ -1,14 +1,17 @@
-class ErrorPage {
-  constructor(browser) {
-    this.browser = browser;
+const Page = require('./page');
+
+class ErrorPage extends Page {
+
+  visit(path) {
+    return this.browser.visit(this.routes.url(path));
   }
 
   getMessage() {
-    return this.browser.text('[data-test="message"]');
+    return this.extractText('message');
   }
 
   getErrorDetails() {
-    return this.browser.text('[data-test="error-details"]');
+    return this.extractText('error-details');
   }
 }
 
