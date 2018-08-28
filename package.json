@@ -11,9 +11,8 @@
     "html-lint": "gulp lint-all-html",
     "pretest": "npm run compile && eslint . && NODE_ENV=test npm run db-migrate && rm -rf test/screenshots/*.html",
     "test-mocha": "mocha",
-    "test": "NODE_ENV=test npm run test-mocha && EXPRESS_BASE_PATH=/example-base-path NODE_ENV=test npm run test-mocha && NODE_ENV=test npm run features && npm run html-lint",
+    "test": "NODE_ENV=test npm run test-mocha && EXPRESS_BASE_PATH=/example-base-path NODE_ENV=test npm run test-mocha && npm run html-lint",
     "db-migrate": "knex migrate:latest --knexfile db/knexfile.js",
-    "features": "NODE_ENV=test cucumber.js && NODE_ENV=test EXPRESS_BASE_PATH=/example-base-path cucumber.js",
     "heroku-postbuild": "npm run compile",
     "create-migration": "knex migrate:make --knexfile db/knexfile.js $MIGRATION"
   },
@@ -59,7 +58,6 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "cucumber": "^0.10.2",
     "del": "^3.0.0",
     "eslint": "^2.9.0",
     "eslint-config-airbnb-base": "^3.0.1",
