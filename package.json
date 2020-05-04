@@ -14,7 +14,9 @@
     "test": "NODE_ENV=test npm run test-mocha && EXPRESS_BASE_PATH=/example-base-path NODE_ENV=test npm run test-mocha && npm run html-lint",
     "db-migrate": "knex migrate:latest --knexfile db/knexfile.js",
     "heroku-postbuild": "npm run compile",
-    "create-migration": "knex migrate:make --knexfile db/knexfile.js $MIGRATION"
+    "create-migration": "knex migrate:make --knexfile db/knexfile.js $MIGRATION",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "// NOTE": [
     "^Pinned dependencies are actually devDependencies, which are only",
@@ -47,7 +49,7 @@
     "helmet": "^3.5.0",
     "hogan.js": "~3.0",
     "i18n": "^0.8.2",
-    "jquery": "^2.2.4",
+    "jquery": "^3.5.0",
     "knex": "^0.11.5",
     "lmt-utils": "~0.1.4",
     "morgan": "^1.6.1",
@@ -60,7 +62,8 @@
     "setprototypeof": "^1.0.3",
     "vinyl-source-stream": "^1.1.0",
     "winston": "^2.2.0",
-    "ws": "^3.3.1"
+    "ws": "^3.3.1",
+    "snyk": "^1.317.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -79,5 +82,6 @@
   "engines": {
     "node": "6.11.1",
     "npm": "5.2.0"
-  }
+  },
+  "snyk": true
 }
