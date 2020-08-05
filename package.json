@@ -14,7 +14,9 @@
     "test": "NODE_ENV=test npm run test-mocha && EXPRESS_BASE_PATH=/example-base-path NODE_ENV=test npm run test-mocha && npm run html-lint",
     "db-migrate": "knex migrate:latest --knexfile db/knexfile.js",
     "heroku-postbuild": "npm run compile",
-    "create-migration": "knex migrate:make --knexfile db/knexfile.js $MIGRATION"
+    "create-migration": "knex migrate:make --knexfile db/knexfile.js $MIGRATION",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "// NOTE": [
     "^Pinned dependencies are actually devDependencies, which are only",
@@ -23,13 +25,13 @@
   "dependencies": {
     "babel-preset-es2015": "^6.9.0",
     "bindings": "^1.2.1",
-    "body-parser": "~1.17.1",
-    "bookshelf": "^0.9.5",
+    "body-parser": "~1.18.2",
+    "bookshelf": "^0.10.0",
     "browserify": "^13.0.1",
     "consolidate": "~0.14",
     "cookie-parser": "~1.3",
-    "debug": "~2.2",
-    "express": "~4.15.2",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
     "font-awesome": "^4.7.0",
     "govuk-elements-sass": "^1.1.4",
     "govuk_frontend_toolkit": "^4.10.0",
@@ -40,27 +42,28 @@
     "gulp-plumber": "^1.1.0",
     "gulp-rev": "^8.1.0",
     "gulp-rev-collector": "^1.2.3",
-    "gulp-sass": "^2.3.1",
+    "gulp-sass": "^3.0.0",
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
-    "helmet": "^3.5.0",
+    "helmet": "^3.21.1",
     "hogan.js": "~3.0",
     "i18n": "^0.8.2",
-    "jquery": "^2.2.4",
-    "knex": "^0.11.5",
+    "jquery": "^3.5.0",
+    "knex": "^0.19.5",
     "lmt-utils": "~0.1.4",
-    "morgan": "^1.6.1",
+    "morgan": "^1.9.1",
     "morgan-json": "^1.1.0",
     "node-uuid": "~1.4",
     "npm-git-secrets": "^1.0.1",
-    "pg": "^4.5.5",
+    "pg": "^4.5.7",
     "run-sequence": "^2.2.1",
-    "serve-favicon": "~2.3",
+    "serve-favicon": "~2.4.5",
     "setprototypeof": "^1.0.3",
     "vinyl-source-stream": "^1.1.0",
     "winston": "^2.2.0",
-    "ws": "^3.3.1"
+    "ws": "^3.3.1",
+    "snyk": "^1.369.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -79,5 +82,6 @@
   "engines": {
     "node": "6.11.1",
     "npm": "5.2.0"
-  }
+  },
+  "snyk": true
 }
