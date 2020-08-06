@@ -1,7 +1,8 @@
 const gulp = require('gulp');
 const clean = require('gulp-clean');
-const runSequence = require('run-sequence');
-const gutil = require('gulp-util');
+const runSequence = require('gulp4-run-sequence');
+const log = require('fancy-log');
+const c = require('ansi-colors');
 const sass = require('gulp-sass');
 const plumber = require('gulp-plumber');
 const spawn = require('child_process').spawn;
@@ -11,42 +12,58 @@ const source = require('vinyl-source-stream');
 const streamify = require('gulp-streamify');
 const uglify = require('gulp-uglify');
 const { lintHtml } = require('lmt-utils');
-const http = require('http');
 const rev = require('gulp-rev');
 const debug = require('gulp-debug');
+const request = require('request-promise');
 
 const stagePath = 'dist/stage/';
 let node;
 
-gulp.task('lint-all-html', () => {
-  process.env = process.env || 'TEST';
-  const port = 3001;
-  const serverStartPromise = new Promise(accept =>
-    // eslint-disable-next-line global-require
-    http.createServer(require('./app/app'))
-      .listen(port, () => accept())
-  );
-  return serverStartPromise.then(() => lintHtml({
-    url: `http://localhost:${port}`,
-  }))
-    .then(() => process.exit(0))
-    .catch(e => gutil.log(gutil.colors.red(e)) && process.exit(1));
-});
+gulp.task('lint-all-html', gulp.series(done => {
+  const port = '3001';
+    // this is a bit dirty. We are doing this because the http server cannot be closed
+    // which means that the gulp process hangs forever. A process.exit(0) also causes
+    // gulp to error... rock } | hard place
+  const proc = spawn('node', ['./start-test-server.js'], { PORT: port });
+  function requestRetry(url, wait = 1000, max = 20, i = 0) {
+    return request.get(url)
+            .then(() => log.info(`response received from ${url}`))
+            .catch(() => new Promise((acc, rej) => {
+              if (i > max) {
+                log.error(`never connected to ${url}.. tried ${max} times`);
+                rej(`never connected to ${url}.. tried ${max} times`);
+              }
+              setTimeout(() => {
+                log.info('waiting for server to connect');
+                acc(requestRetry(url, wait, max, i + 1));
+              }, wait);
+            }));
+  }
+  const url = `http://localhost:${port}`;
+  return requestRetry(url)
+        .then(() => lintHtml({ url }))
+        .catch(e => {
+          log(c.red(e));
+          return 'lint-all-html failed';
+        })
+        .then(e => proc.kill('SIGINT') && done(e));
+}));
 
-gulp.task('browserify', () =>
-  browserify('app/assets/js/main.js')
-    .bundle()
-    .on('error', function (err) {
-      gutil.log(gutil.colors.red('Browserify compilation error:'));
-      gutil.log(err);
-      this.emit('end');
-    })
-    .pipe(plumber())
-    .pipe(source('main.js'))
-    .pipe(streamify(babel({ presets: ['es2015'] }))) // babel doesn't support streaming
-    .pipe(streamify(uglify())) // uglify doesn't support streaming
-    .pipe(gulp.dest(`${stagePath}js`))
-);
+gulp.task('browserify', gulp.series(() =>
+    browserify('app/assets/js/main.js')
+        .bundle()
+        .on('error', function (err) {
+          log(c.red('Browserify compilation error:'));
+          log(err);
+          this.emit('end');
+        })
+        .pipe(plumber())
+        .pipe(source('main.js'))
+        // babel doesn't support streaming
+        .pipe(streamify(babel({ presets: ['@babel/preset-env'] })))
+        .pipe(streamify(uglify())) // uglify doesn't support streaming
+        .pipe(gulp.dest(`${stagePath}js`))
+));
 
 gulp.task('js-vendor', () =>
   gulp.src([
@@ -55,13 +72,13 @@ gulp.task('js-vendor', () =>
   ]).pipe(gulp.dest(`${stagePath}js`))
 );
 
-gulp.task('js', ['browserify', 'js-vendor']);
+gulp.task('js', gulp.series('browserify', 'js-vendor'));
 
 gulp.task('fonts', () =>
   gulp.src('node_modules/font-awesome/fonts/*').pipe(gulp.dest(`${stagePath}fonts`))
 );
 
-gulp.task('css', ['fonts'], () =>
+gulp.task('css', gulp.series('fonts', () =>
   gulp.src('app/assets/stylesheets/*.scss')
     .pipe(plumber())
     .pipe(
@@ -74,7 +91,7 @@ gulp.task('css', ['fonts'], () =>
         ],
       }))
     .pipe(gulp.dest(`${stagePath}stylesheets/`))
-);
+));
 
 gulp.task('clean', () =>
   gulp.src('dist/public', { read: false, allowEmpty: true })
@@ -98,8 +115,7 @@ gulp.task('revision:steps', (callback) =>
   runSequence('clean', 'js', 'css', 'revision:rename', callback)
 );
 
-gulp.task('compile', ['revision:steps']);
-
+gulp.task('compile', gulp.series('revision:steps'));
 
 gulp.task('server', () => {
   if (node) node.kill();
