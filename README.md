@@ -11,8 +11,7 @@ A hello world app, based on [express], which looks like [gov.uk]
 Use node 6.11.1 and npm >5. Setup with [nvm](https://github.com/creationix/nvm):
 
 ```sh
-$ nvm install 6.11.1
-$ npm install -g npm@5.2.0
+$ nvm install 12.18.3
 ``` 
 
 Ensure `node_modules/.bin` is on your path
@@ -24,9 +23,13 @@ a `DATABASE_URL` environment variable to a valid [PostgreSQL connection string]
 Setup the application:
 
 ```sh
-$ psql -c "create database hello_world;"
-$ psql -c "create database hello_world_test;"
+$ docker run --name postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres
+$ docker exec -it postgres /bin/bash
+$ psql -U postgres -c "create database hello_world;"
+$ psql -U postgres -c "create database hello_world_test;"
+$ export DATABASE_URL=postgres://postgres:password@localhost/hello_world
 $ npm install
+$ npm run db-migrate
 $ npm run watch
 ```
 
