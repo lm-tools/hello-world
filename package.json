@@ -56,7 +56,7 @@
     "lmt-utils": "~0.1.4",
     "morgan": "^1.6.1",
     "morgan-json": "^1.1.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^6.0.1",
     "npm-git-secrets": "^1.0.5",
     "pg": "^4.5.5",
     "request": "^2.81.0",
