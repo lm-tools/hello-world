@@ -27,7 +27,7 @@
     "ansi-colors": "4.1.1",
     "bindings": "^1.2.1",
     "body-parser": "~1.18.2",
-    "bookshelf": "^0.10.0",
+    "bookshelf": "^0.14.0",
     "browserify": "^13.0.1",
     "consolidate": "~0.14",
     "cookie-parser": "~1.3",
