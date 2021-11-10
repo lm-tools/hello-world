@@ -46,7 +46,7 @@
     "gulp-rev-collector": "^1.2.3",
     "gulp-sass": "^4.0.2",
     "gulp-streamify": "^1.0.2",
-    "gulp-uglify": "^1.5.3",
+    "gulp-uglify": "^3.0.0",
     "gulp4-run-sequence": "^1.0.1",
     "helmet": "^3.5.0",
     "hogan.js": "~3.0",
