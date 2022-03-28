@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.0
+version: v1.22.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -12,3 +12,36 @@ patch:
         patched: '2017-03-21T10:23:37.292Z'
     - gulp > vinyl-fs > glob-watcher > gaze > globule > glob > minimatch:
         patched: '2017-03-21T10:23:37.292Z'
+  SNYK-JS-LODASH-567746:
+    - '@babel/core > lodash':
+        patched: '2022-03-28T16:04:46.779Z'
+    - node-sass > lodash:
+        patched: '2022-03-28T16:04:46.779Z'
+    - gulp-sass > lodash:
+        patched: '2022-03-28T16:04:46.779Z'
+    - knex > lodash:
+        patched: '2022-03-28T16:04:46.779Z'
+    - request-promise-core > lodash:
+        patched: '2022-03-28T16:04:46.779Z'
+    - '@babel/core > @babel/helper-module-transforms > lodash':
+        patched: '2022-03-28T16:04:46.779Z'
+    - gulp-sass > node-sass > lodash:
+        patched: '2022-03-28T16:04:46.779Z'
+    - request-promise > request-promise-core > lodash:
+        patched: '2022-03-28T16:04:46.779Z'
+    - '@babel/preset-env > @babel/plugin-transform-classes > @babel/helper-define-map > lodash':
+        patched: '2022-03-28T16:04:46.779Z'
+    - node-sass > gaze > globule > lodash:
+        patched: '2022-03-28T16:04:46.779Z'
+    - '@babel/preset-env > @babel/plugin-transform-unicode-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash':
+        patched: '2022-03-28T16:04:46.779Z'
+    - gulp-sass > node-sass > gaze > globule > lodash:
+        patched: '2022-03-28T16:04:46.779Z'
+    - '@babel/preset-env > @babel/preset-modules > @babel/plugin-transform-dotall-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash':
+        patched: '2022-03-28T16:04:46.779Z'
+    - '@babel/preset-env > @babel/preset-modules > @babel/plugin-transform-dotall-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2022-03-28T16:04:46.779Z'
+    - '@babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2022-03-28T16:04:46.779Z'
+    - '@babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2022-03-28T16:04:46.779Z'
