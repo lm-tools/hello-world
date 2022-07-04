@@ -59,7 +59,7 @@
     "node-sass": "^4.12.0",
     "npm-git-secrets": "^1.0.5",
     "pg": "^4.5.5",
-    "request": "^2.81.0",
+    "request": "^2.87.0",
     "request-promise": "^4.2.1",
     "request-promise-core": "^1.1.1",
     "sass": "^1.22.10",
